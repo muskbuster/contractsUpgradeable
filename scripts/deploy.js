@@ -4,7 +4,7 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
-const { upgrades } = require("hardhat");
+const { upgrades, ethers } = require("hardhat");
 const hre = require("hardhat");
 
 async function main() {
@@ -58,10 +58,7 @@ async function main() {
    * INRC deployment script, to be only launched on bitgert else comment out
    */
   const INRC = await hre.ethers.getContractFactory("INRChai");
-  const deploymentINRC = await hre.upgrades.deployProxy(INRC, [], {
-    initializer: "initialize",
-  });
-
+  const deploymentINRC = await INRC.deploy();
   await deploymentINRC.deployed();
 
   console.log("INRC ADDRESS:", deploymentINRC.address);
