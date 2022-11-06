@@ -1,6 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomiclabs/hardhat-ethers");
 require("@openzeppelin/hardhat-upgrades");
+require("dotenv").config();
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.17",
@@ -19,13 +20,42 @@ module.exports = {
     },
     matic: {
       url: "https://rpc-mumbai.maticvigil.com",
-      accounts: [
-        "209b0e771f25902a24d908fb25eab7ef3d3d3ae44496c04f3d9d313222b682aa",
-      ],
+      accounts: [process.env.PRIVATE_KEY],
+    },
+    bitgertTestnet: {
+      url: `https://testnet-rpc.brisescan.com`,
+      accounts: {
+        mnemonic:
+          "coyote stuff tired ancient flat practice state urban trade tonight sentence cry",
+      },
+    },
+
+    goerli: {
+      url: "https://rpc.ankr.com/eth_goerli",
+      accounts: [process.env.PRIVATE_KEY],
+    },
+
+    bsctestnet: {
+      url: "https://rpc.ankr.com/bsc_testnet_chapel",
+      accounts: [process.env.PRIVATE_KEY],
+    },
+
+    //polygon, bsc, eth
+    polygon: {
+      url: "https://polygon-rpc.com",
+      accounts: [process.env.PRIVATE_KEY],
+    },
+    bsc: {
+      url: "https://bsc-dataseed1.binance.org",
+      accounts: [process.env.PRIVATE_KEY],
+    },
+    eth: {
+      url: "https://rpc.ankr.com/eth",
+      accounts: [process.env.PRIVATE_KEY],
     },
     bitgert: {
-      url: `https://testnet-rpc.brisescan.com`,
-      accounts:{mnemonic: "coyote stuff tired ancient flat practice state urban trade tonight sentence cry"},
+      url: "https://chainrpc.com",
+      accounts: [process.env.PRIVATE_KEY],
     },
   },
 };

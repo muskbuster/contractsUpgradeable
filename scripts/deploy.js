@@ -8,41 +8,75 @@ const { upgrades } = require("hardhat");
 const hre = require("hardhat");
 
 async function main() {
-
   const [deployer] = await ethers.getSigners();
 
-	console.log(
-	"Deploying contracts with the account:",
-	deployer.address
-	);
+  console.log("Deploying contracts with the account:", deployer.address);
 
-	// console.log("Account balance:", (await deployer.getBalance()).toString())
+  /**
+   * HTLC deployment script
+   */
+  const HTLC = await hre.ethers.getContractFactory("htlc");
+  const deploymentHTLC = await hre.upgrades.deployProxy(HTLC, [], {
+    initializer: "initialize",
+  });
+  await deploymentHTLC.deployed();
 
-  // const TimeLock = await hre.ethers.getContractFactory("Timelock")
-  // const timeLockDeploy = await TimeLock.deploy("0x4D829adBe2EBF5D3F2452D256bc2D63aa893C779")
+  console.log("HTLC ADDRESS:", deploymentHTLC.address);
 
-  // const ModifiedTimeLock = await hre.ethers.getContractFactory("ModifiedTimeLock")
+  /**
+   * LIQUIDITY POOL deployment script , to be deployed on the same network as the HTLC
+   */
 
-  // const ModifiedTimeLockDeploy = await ModifiedTimeLock.deploy()
+  const LIQUIDITY_POOL = await hre.ethers.getContractFactory("LiquidityPool");
+  const deploymentLiquidityPool = await hre.upgrades.deployProxy(
+    LIQUIDITY_POOL,
+    [],
+    {
+      initializer: "initialize",
+    }
+  );
 
-  // await timeLockDeploy.deployed()
+  await deploymentLiquidityPool.deployed();
+  console.log("LIQUIDITY POOL ADDRESS:", deploymentLiquidityPool.address);
 
-  // await ModifiedTimeLockDeploy.deployed()
-  // console.log(
-  //   `Timelock deployed at ${timeLockDeploy.address}`
-  // );
-  // console.log("************************", ModifiedTimeLockDeploy.address)
+  /**
+   * TREASURY POOL deployment script , to be deployed on the same network as the HTLC
+   */
 
+  const TREASURY_POOL = await hre.ethers.getContractFactory("TreasuryPool");
+  const deploymentTreasuryPool = await hre.upgrades.deployProxy(
+    TREASURY_POOL,
+    [],
+    {
+      initializer: "initialize",
+    }
+  );
+  await deploymentTreasuryPool.deployed();
+  console.log("TREASURY POOL:", deploymentTreasuryPool.address);
 
-    const HTLC = await hre.ethers.getContractFactory("htlc");
-    const deployment = await hre.upgrades.deployProxy(HTLC,[],{
-      initializer:"initialize",
-    });
-    await deployment.deployed();
+  /**
+   * INRC deployment script, to be only launched on bitgert else comment out
+   */
+  const INRC = await hre.ethers.getContractFactory("INRChai");
+  const deploymentINRC = await hre.upgrades.deployProxy(INRC, [], {
+    initializer: "initialize",
+  });
 
-    console.log("*******************", deployment.address)
+  await deploymentINRC.deployed();
 
+  console.log("INRC ADDRESS:", deploymentINRC.address);
 
+  /**
+   * CHAIT deployment script to be only launched on bitgert else comment out
+   */
+
+  const CHAIT = await hre.ethers.getContractFactory("Chai");
+  const deploymentCHAIT = await hre.upgrades.deployProxy(CHAIT, [], {
+    initializer: "initialize",
+  });
+
+  await deploymentCHAIT.deployed();
+  console.log("CHAIT ADDRESS:", deploymentCHAIT.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

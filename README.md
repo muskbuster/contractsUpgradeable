@@ -4,10 +4,10 @@ The Chai dex development contracts
 
 Install Packages : `npm i`
 
-Now you can deploy the contract using : `npx hardhat run scripts/deploy.js`
+Now you can deploy the contract using : `npx hardhat run scripts/deploy.js --network <networkName as in config file>`
 
-<!-- With the contract address, you can run the following functions: -->
+Deploy only Liquidity Pool and treasury pool and INRC and ChaiT.
 
-Contract deployed at : `0x946708245Bd8113fF7F75990244e13B4611F5F69`
+To set addresses in DEX : Set INRC address only on BITGERT CHAIN
 
-Can interact with the functions
+
