@@ -56,7 +56,7 @@ function _authorizeUpgrade(address newContract) internal override onlyOwner {}
         );
         emit Recieved(names[_usd], msg.sender, _amount);
     }
-       function BuyNat(string memory network,uint256 amount)public payable {
+       function BuyNat(string memory network,uint256 amount)public payable whenNotPaused {
      amount=msg.value;
      network="MATIC";
      emit Recieved(network, msg.sender,amount);
