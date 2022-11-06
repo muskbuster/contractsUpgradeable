@@ -5,9 +5,13 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 contract LiquidityPool is Ownable,Pausable {
   
-
+   
     function unpause() public onlyOwner {
         _unpause();
+    }
+    
+    function pause() public onlyOwner {
+        _pause();
     }
  constructor() {}
     event Stake(string USD, address liquidityProvider, uint256 amount);
