@@ -1,20 +1,23 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomiclabs/hardhat-ethers");
 require("@openzeppelin/hardhat-upgrades");
+require("hardhat-gas-reporter");
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.17",
   defaultNetwork: "hardhat",
+  gasReporter: {
+    enabled: true,
+  },
   networks: {
     hardhat: {
       // url: '127.0.0.1',
       accounts: [
         {
-          privateKey:
-            "0x8166f546bab6da521a8369cab06c5d2b9e46670292d85c875ee9ec20e84ffb61",
-          balance:
-            "1000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          privateKey: process.env.PRIVATE_KEY,
+          balance: "1000000000000000000000",
         },
       ],
     },

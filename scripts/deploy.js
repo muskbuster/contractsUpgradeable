@@ -57,23 +57,23 @@ async function main() {
   /**
    * INRC deployment script, to be only launched on bitgert else comment out
    */
-  const INRC = await hre.ethers.getContractFactory("INRChai");
-  const deploymentINRC = await INRC.deploy();
-  await deploymentINRC.deployed();
+  // const INRC = await hre.ethers.getContractFactory("INRChai");
+  // const deploymentINRC = await INRC.deploy();
+  // await deploymentINRC.deployed();
 
-  console.log("INRC ADDRESS:", deploymentINRC.address);
+  // console.log("INRC ADDRESS:", deploymentINRC.address);
 
   /**
    * CHAIT deployment script to be only launched on bitgert else comment out
    */
 
-  const CHAIT = await hre.ethers.getContractFactory("Chai");
-  const deploymentCHAIT = await hre.upgrades.deployProxy(CHAIT, [], {
-    initializer: "initialize",
-  });
+  //   const CHAIT = await hre.ethers.getContractFactory("Chai");
+  //   const deploymentCHAIT = await hre.upgrades.deployProxy(CHAIT, [], {
+  //     initializer: "initialize",
+  //   });
 
-  await deploymentCHAIT.deployed();
-  console.log("CHAIT ADDRESS:", deploymentCHAIT.address);
+  //   await deploymentCHAIT.deployed();
+  //   console.log("CHAIT ADDRESS:", deploymentCHAIT.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
