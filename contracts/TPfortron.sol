@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
-contract TreasuryPool is Ownable ,Pausable {
+contract TreasuryPoolTron is Ownable ,Pausable {
     event Recieved( string USD, address buyer, uint256 amount); // upon recieve there should be a mint
     event USDCReciever( string USD, address buyer, uint256 amount);
     event Redeemed(string USD, address redeemer, uint256 amount); // upon redeem there should be equal burn

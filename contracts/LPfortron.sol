@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-contract LiquidityPool is Ownable,Pausable {
+contract LiquidityPoolTron is Ownable,Pausable {
   
    
     function unpause() public onlyOwner {
