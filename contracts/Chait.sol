@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// CHAIDEX Version 1
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";

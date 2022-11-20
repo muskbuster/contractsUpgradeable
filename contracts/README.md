@@ -29,5 +29,19 @@ It accepts the Chaidex governance/fee token from users who use the DEX and seper
 
 1.fees--params(amount)-- amount of chait Paid as fee is distributed to 2 wallets.<br />
 
-## DEX Logic / HTLC 
+## INRC and ChaiT contracts
+These are default ERC20 contracts and follow all rules set by the standard<br />
+The INRC contract has an event emitter whenever redeem is called which will trigger the redeem function in the treasury pool<br />
 
+The ChaiT contract is  default  erc20 contract.<br />
+
+
+
+
+## DEX Logic / HTLC
+
+
+
+## Test USD token(only for testing)
+
+Standard token to test on testnet
