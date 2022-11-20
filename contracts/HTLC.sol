@@ -29,9 +29,9 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
 
     //address public owner;
 
-    uint256 public constant MAX_DELAY = 30; //Have to change this
+    uint256 public constant MAX_DELAY = 86400; //Have to change this
 
-    struct Track {
+     struct  Track  {
         uint256 id;
         address seller;
         uint256 blocktStamp;
@@ -62,20 +62,13 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
     address public INRC;
 
 
-    // constructor(address _INRC) {
-    //     INRC = _INRC;
-    //     owner = msg.sender;
-    // }
+   
 
     function setAddress(address _INRC) public onlyOwner {
         INRC = _INRC;
     }
 
-    // modifier onlyOwner() {
-    //     require(msg.sender == owner, "Not Autorized");
-    //     _;
-    // }
-
+   
     function deposit(
         address seller,
         uint256 amount,
@@ -168,7 +161,6 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
         if (!TradeQueued[id]) {
             revert TradeDoesntExist(id);
         }
-        // require(refundedTo.status == false, "Trade already Closed");
         require(TradeInprogress[id], "Trade doesnt exist or is Closed");
         require(refundedTo.seller == msg.sender, "Unauthorized");
         require(tradesData(refundedTo.seller) > 0, "No Amount");
@@ -177,7 +169,7 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
         TradeInprogress[id] = false;
         payable(refundedTo.seller).transfer(refundedTo.value);
 
-        // refundedTo.value = 0;
+     
 
     }
 
@@ -193,8 +185,6 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
         require(block.timestamp > currentTimeStamp, "Cannot withdraw yet");
         TradeInprogress[id] = false;
         IERC20(INRC).transfer(refundedTo.seller, refundedTo.value);
-
-        // refundedTo.value = 0;
     }
 
     function viewTrades(uint256 id)

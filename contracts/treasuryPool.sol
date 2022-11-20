@@ -60,7 +60,7 @@ function _authorizeUpgrade(address newContract) internal override onlyOwner {}
     /**
      * @dev Owner Authorizes the user's redeem request
      */
-    // upon redeem the money is sent to them and equivalent inrc is burntF
+    // upon redeem the money is sent to them and equivalent inrc is burnt
    function Redeem(address redeemer,uint8 _usd, uint256 _amount) public onlyOwner whenNotPaused {
         require(_amount > 0, "amount cannot be 0");
         IERC20Upgradeable(USDStable[_usd]).transfer(redeemer, _amount);

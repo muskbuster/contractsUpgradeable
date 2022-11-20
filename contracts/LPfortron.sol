@@ -1,30 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
-contract LiquidityPool is Initializable, UUPSUpgradeable, OwnableUpgradeable,PausableUpgradeable {
-    /**
-     * Event Stake
-     * Note:
-     * is emitted when a liquidity providers stakes into liquidity pool
-     */
-     function initialize() public initializer {
-       __UUPSUpgradeable_init();
-       __Ownable_init();
-       __Pausable_init();
-   }
-   function _authorizeUpgrade(address newContract) internal override onlyOwner {}
- function pause() public onlyOwner {
-        _pause();
-    }
-    
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+contract LiquidityPool is Ownable,Pausable {
+  
+   
     function unpause() public onlyOwner {
         _unpause();
     }
-
+    
+    function pause() public onlyOwner {
+        _pause();
+    }
+ constructor() {}
     event Stake(string USD, address liquidityProvider, uint256 amount);
     /**
      * Event Unstake
@@ -58,7 +47,7 @@ contract LiquidityPool is Initializable, UUPSUpgradeable, OwnableUpgradeable,Pau
      */
     mapping(address => mapping(uint8 => uint256)) public liquidityPool;
     mapping(address => mapping(uint8 => bool)) public unstakedMax;
-
+    
 
     /**
      * No of times the same user has staked in the Liquidity Pool
@@ -75,8 +64,6 @@ contract LiquidityPool is Initializable, UUPSUpgradeable, OwnableUpgradeable,Pau
      */
     uint256 public totalLiquidity;
     bool public epochover;
-
-
     /**
      * @dev Updates the address of the USD stable coins in the list
      */
@@ -125,13 +112,15 @@ epochover=_over;
      * @param _amount amount of USD to Stake
      * NOTE:
      *  Visibility: Internal
+     * TODO:
+     *  Define the epochs and reward algorithm along woth 24-36 hur cooldown timelock in immediate iteration
      */
     function _stake(uint8 _usd, uint256 _amount) internal whenNotPaused {
         require(_amount > 0, "Treasury Pool: Amount cannot be Zero");
         if (liquidityPool[msg.sender][_usd] == 0) {
             liquidityPoolStakes[msg.sender][_usd] += 1;
         }
-        IERC20Upgradeable(USDStable[_usd]).transferFrom(
+        IERC20(USDStable[_usd]).transferFrom(
             msg.sender,
             address(this),
             _amount
@@ -150,6 +139,8 @@ epochover=_over;
      * @param _amount amount of USD to Stake
      * NOTE:
      *  Visibility: Internal
+     * TODO:
+     *  Define the epochs and reward algorithm along woth 24-36 hur cooldown timelock in immediate iteration
      */
     function _unStake(uint8 _usd, uint256 _amount) internal whenNotPaused {
         uint256 balance = liquidityPool[msg.sender][_usd];
@@ -157,9 +148,9 @@ epochover=_over;
            _amount<= balance *80/100 ,
             "Treasury Pool: Amount is Zero or Greater than Stake"
         );
-         require( !unstakedMax[msg.sender][_usd],"unstake full later ");
+         require( !unstakedMax[msg.sender][_usd],"unstake full later first");
          unstakedMax[msg.sender][_usd]=true;
-        IERC20Upgradeable(USDStable[_usd]).transfer(msg.sender, _amount);
+        IERC20(USDStable[_usd]).transfer(msg.sender, _amount);
         liquidityPool[msg.sender][_usd] -= _amount;
         totalLiquidity -= _amount;
         emit Unstake(names[_usd], msg.sender, _amount);
@@ -167,10 +158,10 @@ epochover=_over;
 function _unstakeAll(uint8 _usd) internal whenNotPaused {
 
         uint256 balance = liquidityPool[msg.sender][_usd];
-
-        require (epochover,"epoch not over");
-        require( unstakedMax[msg.sender][_usd],"unstake 80% first");
-        IERC20Upgradeable(USDStable[_usd]).transfer(msg.sender,balance);
+        
+        require (epochover,"yet to unstake");
+        require( unstakedMax[msg.sender][_usd],"unstake half first");
+        IERC20(USDStable[_usd]).transfer(msg.sender,balance);
         liquidityPool[msg.sender][_usd] -= balance;
         totalLiquidity -= balance;
         liquidityPoolStakes[msg.sender][_usd] -= 1;

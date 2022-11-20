@@ -1,18 +1,23 @@
-# onChain-Contracts
-The Chai dex development contracts
+# INRC mint and DEX logic 
+## INRC minting
+INRC is a stablecoin which is pegged to usd stables and converted to INR and minted.
+There are two pools where the USD stablecoins go into.
+One is a Liquidity pool where the users stake their USD stablecoins whose volume defines the maximum amount of INRC can be minted. 
 
+The other is the treasury pool where the users who buy INRC in exchange for stablecoins and can be burnt to redeem the stablecoin of their choice.
 
-Install Packages : `npm i`
+The treasury pool emits events whenever there is a buy which triggers the mint in the INRC contract. And redeem/burn of inrc triggers the usd stables transfer from Treasurypool.
 
-Now you can deploy the contract using : `npx hardhat run scripts/deploy.js --network <networkName as in config file>`
+Stakers can withdraw 80% of their stakes at anytime and remaining after an epoch is over. 
+The current trusted stablecoins are USDC USDT and BUSD.
 
-Deploy only Liquidity Pool and treasury pool and INRC and ChaiT.
+INRC will be on the bitgert chain and the treasury pool , liquidty pool are multichain on EVM.
 
-To set addresses in DEX : Set INRC address only on BITGERT CHAIN
+## DEX Logic
 
-Once deployed, go to remix, connect your wallet to respective network and connect to the contract by :
-    Copy pasting the contract code to remix and compiling and then deploy at address in remix from the remix deploy section
-    Now you can set the addresses of the deployed contract
+The smart contract is an upgradeable logic contract that caters to the storing of funds through deposits, withdrawals, and refunds. With respect to the architecture, the contract is deployed on different chains and has a unique TradeID and a passphrase that has to be passed in to the functions while calling any of them for either refund, deposit or withdrawals.
+Now for a trade that involves trade-off of a native token and INRC, as any trades that happen in DeX happen against INRC only, hence, when a trade is matched through the backend and you have to deposit the amount, the respective chain of the native token is called and parameters involving a passphrase and trade Id is called. Now when the other party deposits bitgert chain, INRC exists here, and is called with the same tradeID but with a different passphrase set by this party. Hence once both funds are locked, in order to withdraw the required token, the passphrase corresponding to that trade id on that respective chain needs to be sent as a parameter which ensures the safety of transfers without the need for bridges or wrapped tokens as the passphrase saves all the funds in the respective chains. If the other party doesn't put in the amount within 24 hours, you can withdraw the amount as the chain is updated with the owner of those tokens and hence can transfer your tokens back. 
 
-For Liquidiy Pool, you need to call setUSDAddress on the contract for setting USD stable address.
+Therefore, in order to access any funds out, only the required party will be able to do it as only the required party will get your passphrase. 
+
 
