@@ -1,6 +1,6 @@
 # INRC mint and DEX logic 
-To understand the contract individually pleashead over to [Contracts description](contracts/README.md)
-To know the Test setup and audit setup go to[test-setup](test/readME.md)
+To understand the contract individually please head over to [Contracts description](contracts/README.md)</br>
+To know the Test setup and audit setup go to [test-setup](test/readME.md)
 
 ## INRC minting
 INRC is a stablecoin which is pegged to usd stables and converted to INR and minted.
