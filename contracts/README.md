@@ -48,7 +48,7 @@ This contract is used to store the dex exchange currencies until a trade is eith
         string calldata passphrase,
         address buyer,
         uint256 chainIDBuyer,
-        uint256 amount2) -- native tokens
+        uint256 amount2) -- native tokens<br />
 
 2.depositINRC -- params( address seller,
         uint256 amount,
@@ -56,13 +56,13 @@ This contract is used to store the dex exchange currencies until a trade is eith
         string calldata passphrase,
         address buyer,
         uint256 chainIDBuyer,
-        uint256 amount2) -- to deposit INRC tokens for trade -- 
+        uint256 amount2) -- to deposit INRC tokens for trade -- <br />
 
-3.withDraw --payable --params(uint256 id, string calldata password) -- requires password and directly sends funds to buyer address only 
-4.withDrawINRC --params(uint256 id, string calldata password)--requires password and directly sends funds to buyer address only 
-5.reFund --payable--params(uint256 id) -- refunds if nobody withdraws after 24 hrs to the seller only
-6.refFundINRC --params(uint256 id) -- refunds if nobody withdraws after 24 hrs to the seller only
-7.compareDigest --internal --params( string memory digest, string memory secret) -- to check password befor withdraw
+3.withDraw --payable --params(uint256 id, string calldata password) -- requires password and directly sends funds to buyer address only <br />
+4.withDrawINRC --params(uint256 id, string calldata password)--requires password and directly sends funds to buyer address only <br />
+5.reFund --payable--params(uint256 id) -- refunds if nobody withdraws after 24 hrs to the seller only<br />
+6.refFundINRC --params(uint256 id) -- refunds if nobody withdraws after 24 hrs to the seller only<br />
+7.compareDigest --internal --params( string memory digest, string memory secret) -- to check password befor withdraw<br />
 
 
 ## Test USD token(only for testing)
