@@ -27,9 +27,8 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
     }
 
 
-    //address public owner;
 
-    uint256 public constant MAX_DELAY = 86400; //Have to change this
+    uint256 public constant MAX_DELAY = 86400; 
 
      struct  Track  {
         uint256 id;
@@ -44,8 +43,6 @@ contract htlc is  Initializable,PausableUpgradeable, OwnableUpgradeable, UUPSUpg
     mapping(uint256 => Track) private TradeTrack;
     mapping(uint256 => bool) private TradeQueued;
     mapping(uint256 => Track) private TradeTrackINRC;
-    //remove status in struct and add it as below
-    //add another mapping of TradeinProgress, check put true while deposit and false while refund and check TradeInprogress for that ID in  withfraw then continue
     mapping(uint256 => bool) private TradeInprogress;
     event Deposit(
         uint256 TradeID,

@@ -615,7 +615,7 @@
     },
     "cd4076bd55f33a3a43f6392d901416ce22ed9c5cb31b91e4cc03c03ab1cc4435": {
       "address": "0xd8Cc4726E13a2c3CbA2A300617dF37ea24fDEbF2",
-      "txHash": "0x07c230a1c60e53800106157e11facc39c702d7db75587885525357c60afd2b83",
+      "txHash": "0x184d00d8664f4351baab3d20627d438d1374fb63a15b8ed239edba667a9e327f",
       "layout": {
         "solcVersion": "0.8.17",
         "storage": [
@@ -698,15 +698,15 @@
             "slot": "251",
             "type": "t_mapping(t_address,t_uint256)",
             "contract": "htlc",
-            "src": "contracts/HTLC.sol:43"
+            "src": "contracts/HTLC.sol:42"
           },
           {
             "label": "TradeTrack",
             "offset": 0,
             "slot": "252",
-            "type": "t_mapping(t_uint256,t_struct(Track)3130_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Track)1675_storage)",
             "contract": "htlc",
-            "src": "contracts/HTLC.sol:44"
+            "src": "contracts/HTLC.sol:43"
           },
           {
             "label": "TradeQueued",
@@ -714,15 +714,15 @@
             "slot": "253",
             "type": "t_mapping(t_uint256,t_bool)",
             "contract": "htlc",
-            "src": "contracts/HTLC.sol:45"
+            "src": "contracts/HTLC.sol:44"
           },
           {
             "label": "TradeTrackINRC",
             "offset": 0,
             "slot": "254",
-            "type": "t_mapping(t_uint256,t_struct(Track)3130_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Track)1675_storage)",
             "contract": "htlc",
-            "src": "contracts/HTLC.sol:46"
+            "src": "contracts/HTLC.sol:45"
           },
           {
             "label": "TradeInprogress",
@@ -730,7 +730,7 @@
             "slot": "255",
             "type": "t_mapping(t_uint256,t_bool)",
             "contract": "htlc",
-            "src": "contracts/HTLC.sol:49"
+            "src": "contracts/HTLC.sol:46"
           },
           {
             "label": "INRC",
@@ -738,7 +738,7 @@
             "slot": "256",
             "type": "t_address",
             "contract": "htlc",
-            "src": "contracts/HTLC.sol:62"
+            "src": "contracts/HTLC.sol:59"
           }
         ],
         "types": {
@@ -766,7 +766,7 @@
             "label": "mapping(uint256 => bool)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_uint256,t_struct(Track)3130_storage)": {
+          "t_mapping(t_uint256,t_struct(Track)1675_storage)": {
             "label": "mapping(uint256 => struct htlc.Track)",
             "numberOfBytes": "32"
           },
@@ -774,7 +774,7 @@
             "label": "string",
             "numberOfBytes": "32"
           },
-          "t_struct(Track)3130_storage": {
+          "t_struct(Track)1675_storage": {
             "label": "struct htlc.Track",
             "members": [
               {

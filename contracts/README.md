@@ -39,7 +39,30 @@ The ChaiT contract is  default  erc20 contract.<br />
 
 
 ## DEX Logic / HTLC
+This contract is used to store the dex exchange currencies until a trade is either completed with the successful exchange or a refund after 24 hours. It involves swap between native and INRC tokens only . It takes passphrase of both users and compares and only the unlocks required funds for unlock
 
+1.deposit -- payable-- params( 
+        address seller,
+        uint256 amount,
+        uint256 id,
+        string calldata passphrase,
+        address buyer,
+        uint256 chainIDBuyer,
+        uint256 amount2) -- native tokens
+
+2.depositINRC -- params( address seller,
+        uint256 amount,
+        uint256 id,
+        string calldata passphrase,
+        address buyer,
+        uint256 chainIDBuyer,
+        uint256 amount2) -- to deposit INRC tokens for trade -- 
+
+3.withDraw --payable --params(uint256 id, string calldata password) -- requires password and directly sends funds to buyer address only 
+4.withDrawINRC --params(uint256 id, string calldata password)--requires password and directly sends funds to buyer address only 
+5.reFund --payable--params(uint256 id) -- refunds if nobody withdraws after 24 hrs to the seller only
+6.refFundINRC --params(uint256 id) -- refunds if nobody withdraws after 24 hrs to the seller only
+7.compareDigest --internal --params( string memory digest, string memory secret) -- to check password befor withdraw
 
 
 ## Test USD token(only for testing)

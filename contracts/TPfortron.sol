@@ -32,12 +32,6 @@ contract TreasuryPoolTron is Ownable ,Pausable {
     }
 
 
-    function BuyNat(string memory network,uint256 amount)public payable whenNotPaused {
-     amount=msg.value;
-     network="MATIC";
-     emit Recieved(network, msg.sender,amount);
-    }
-
     // Tracks any addition of funds to thee pool and emits event received
     function Buy(uint8 _usd, uint256 _amount) public whenNotPaused {
         require(_amount > 0, "amount cannot be 0");
