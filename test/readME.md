@@ -18,7 +18,7 @@ npx hardhat run scripts/deploy.js --network <choose network>
   - [x] Fix compiler warnings
   - [x] Remove TODO and FIXME comments
   - [x] Delete unused code
-- [ ] Testing
+- [x] Testing
   - [x] README gives clear instructions for running tests
   - [x] Testing dependencies are packaged with the code OR are listed including versions
 - [ ] Automated Analysis
